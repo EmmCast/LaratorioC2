@@ -1,12 +1,22 @@
 package com.universidadUnir.tarea.ServicesImpl;
 
 import com.universidadUnir.tarea.Service.ICadenaServices;
+/**
+ * Implementación de los servicios de manipulación de cadenas.
+ *
+ * Proporciona operaciones para contar vocales, invertir texto
+ * y convertir cadenas a mayúsculas.
+ *
+ * @author Isai Emmanuel Castro 
+ * @version 1.0
+ */
+public class CadenaServicesImpl implements ICadenaServices {
 
-public class CadenaServicesImpl implements ICadenaServices{
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int contarVocales(String texto) {
-
         if (texto == null || texto.isEmpty()) {
             return 0;
         }
@@ -23,6 +33,9 @@ public class CadenaServicesImpl implements ICadenaServices{
         return contador;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String invertirCadena(String texto) {
         if (texto == null) {
@@ -31,6 +44,9 @@ public class CadenaServicesImpl implements ICadenaServices{
         return new StringBuilder(texto).reverse().toString();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String convertirMayusculas(String texto) {
         if (texto == null) {

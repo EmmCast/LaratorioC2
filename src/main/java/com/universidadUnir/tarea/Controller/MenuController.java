@@ -1,6 +1,5 @@
 package com.universidadUnir.tarea.Controller;
 
-
 import java.util.Scanner;
 
 import com.universidadUnir.tarea.Model.Estudiante;
@@ -11,6 +10,21 @@ import com.universidadUnir.tarea.Service.IInventarioServices;
 import com.universidadUnir.tarea.Service.IMatrizService;
 import com.universidadUnir.tarea.Util.ConsolaUtil;
 
+
+/**
+ * Controlador principal encargado de gestionar la interacción con el usuario
+ * mediante un menú en consola.
+ *
+ * Esta clase permite acceder a los distintos módulos del sistema:
+ * gestión de estudiantes, operaciones con matrices, manipulación de cadenas
+ * y sistema de inventario.
+ *
+ * Utiliza los servicios correspondientes para delegar la lógica de negocio
+ * y mantiene la responsabilidad de capturar y mostrar información al usuario.
+ *
+ * @author Isai Emmanuel Castro 
+ * @version 1.0
+ */
 public class MenuController {
 
     private final Scanner scanner;
@@ -19,6 +33,16 @@ public class MenuController {
     private final ICadenaServices cadenaService;
     private final IInventarioServices inventarioService;
 
+    /**
+     * Constructor que inicializa el controlador del menú principal con
+     * las dependencias necesarias para operar cada módulo del sistema.
+     *
+     * @param scanner objeto Scanner utilizado para leer la entrada del usuario
+     * @param estudianteService servicio encargado de la gestión de estudiantes
+     * @param matrizService servicio encargado de las operaciones con matrices
+     * @param cadenaService servicio encargado de la manipulación de cadenas
+     * @param inventarioService servicio encargado de la gestión del inventario
+     */
     public MenuController(
             Scanner scanner,
             IEstudianteService estudianteService,
@@ -33,6 +57,13 @@ public class MenuController {
         this.inventarioService = inventarioService;
     }
 
+    /**
+     * Inicia la ejecución del menú principal del sistema.
+     *
+     * Este método muestra de forma repetitiva las opciones disponibles
+     * y redirige al usuario al módulo correspondiente según la opción elegida.
+     * Finaliza únicamente cuando el usuario selecciona la opción de salida.
+     */
     public void iniciar() {
         int opcion;
 
@@ -72,6 +103,12 @@ public class MenuController {
         } while (opcion != 5);
     }
 
+    /**
+     * Muestra y gestiona el submenú correspondiente al módulo de estudiantes.
+     *
+     * Permite agregar estudiantes, listar los estudiantes registrados
+     * y buscar un estudiante por su nombre.
+     */
     private void menuEstudiantes() {
         int opcion;
 
@@ -92,7 +129,7 @@ public class MenuController {
                     int edad = ConsolaUtil.leerEntero(scanner, "Edad: ");
                     double calificacion = ConsolaUtil.leerDouble(scanner, "Calificacion: ");
 
-                    Estudiante estudiante = new Estudiante();
+                    Estudiante estudiante = new Estudiante(nombre, edad, calificacion);
 
                     System.out.println(estudianteService.agregarEstudiante(estudiante));
                     ConsolaUtil.pausar(scanner);
@@ -136,6 +173,13 @@ public class MenuController {
         } while (opcion != 4);
     }
 
+    /**
+     * Ejecuta el módulo de operaciones con matrices.
+     *
+     * Solicita al usuario las dimensiones de la matriz, permite ingresar
+     * sus datos, muestra la matriz capturada y calcula la suma por filas
+     * y la suma total de sus elementos.
+     */
     private void menuMatriz() {
         System.out.println("\n================= MATRIZ DE NUMEROS ================");
 
@@ -162,6 +206,12 @@ public class MenuController {
         ConsolaUtil.pausar(scanner);
     }
 
+    /**
+     * Ejecuta el módulo de manipulación de cadenas.
+     *
+     * Permite contar las vocales de una cadena, invertir su contenido
+     * y convertirlo a mayúsculas.
+     */
     private void menuCadenas() {
         System.out.println("\n=============== MANIPULACION DE CADENAS ============");
         System.out.print("Ingrese una cadena de texto: ");
@@ -174,6 +224,12 @@ public class MenuController {
         ConsolaUtil.pausar(scanner);
     }
 
+    /**
+     * Muestra y gestiona el submenú del sistema de inventario.
+     *
+     * Permite registrar productos, listar el inventario, buscar productos
+     * por identificador y actualizar la cantidad disponible de un producto.
+     */
     private void menuInventario() {
         int opcion;
 

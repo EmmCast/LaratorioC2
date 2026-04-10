@@ -6,14 +6,28 @@ import java.util.List;
 import com.universidadUnir.tarea.Model.Estudiante;
 import com.universidadUnir.tarea.Service.IEstudianteService;
 
-public class EstudianteServicesImpl implements IEstudianteService{
+/**
+ * Implementación del servicio de gestión de estudiantes.
+ *
+ * Administra el registro en memoria de estudiantes, incluyendo
+ * validaciones de datos, búsqueda por nombre y consulta general.
+ *
+ * @author Isai Emmanuel Castro 
+ * @version 1.0
+ */
+public class EstudianteServicesImpl implements IEstudianteService {
 
+    /** Lista interna utilizada para almacenar los estudiantes registrados. */
     private final List<Estudiante> estudiantes = new ArrayList<>();
+
+    /** Cantidad máxima de estudiantes permitidos en el sistema. */
     private static final int MAX_ESTUDIANTES = 10;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String agregarEstudiante(Estudiante agregar) {
-
         if (agregar == null) {
             return "El estudiante no puede ser nulo.";
         }
@@ -38,14 +52,19 @@ public class EstudianteServicesImpl implements IEstudianteService{
         return "Estudiante agregado exitosamente.";
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Estudiante> obtenerTodos() {
         return estudiantes;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Estudiante buscarPorNombre(String nombre) {
-
         if (nombre == null || nombre.trim().isEmpty()) {
             return null;
         }
@@ -59,6 +78,9 @@ public class EstudianteServicesImpl implements IEstudianteService{
         return null;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean estaVacio() {
         return estudiantes.isEmpty();
